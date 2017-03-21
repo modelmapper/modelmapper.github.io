@@ -1,0 +1,84 @@
+      <div class="span3">
+        <ul class="sidenav">
+{% if page.menu == "getting-started" %}
+          <li>Getting Started</li>
+            <ul>
+              <li><a href="#setting-up">Setting Up</a></li>
+              <li><a href="#mapping">Mapping</a></li>
+              <li><a href="#how-it-works">How It Works</a></li>
+              <li><a href="#handling-mismatches">Handling Mismatches</a></li>
+              <li><a href="#validating-matches">Validating Matches</a></li>
+              <li><a href="#next-steps">Next Steps</a></li>
+            </ul>
+          </li>
+          <li><a href="/user-manual">User Manual</a></li>
+          <li><a href="/examples">Examples</a></li>
+{% elsif page.menu == "user-manual" %}
+          <li><a href="/getting-started">Getting Started</a></li>
+          <li><a href="/user-manual">User Manual
+            <ul>
+              <li><a href="/user-manual/property-mapping">Property Mapping</a>
+                <ul>
+                  <li><a href="/user-manual/property-mapping/#deep-mapping">Deep Mapping</a></li>
+                  <li><a href="/user-manual/property-mapping/#skipping-properties">Skipping Properties</a></li>
+                  <li><a href="/user-manual/property-mapping/#converters">Converters</a></li>
+                  <li><a href="/user-manual/property-mapping/#providers">Providers</a></li>
+                  <li><a href="/user-manual/property-mapping/#conditional-mapping">Conditional Mapping</a></li>
+                  <li><a href="/user-manual/property-mapping/#string-mapping">String Mapping</a></li>
+                </ul>
+              </li>
+              <li><a href="/user-manual/validation">Validation</a></li>
+              <li><a href="/user-manual/configuration">Configuration</a>
+                <ul>
+                  <li><a href="/user-manual/configuration/#matching-strategies">Matching Strategies</a></li>
+                </ul>
+              </li>              
+              <li><a href="/user-manual/converters">Converters</a></li>
+              <li><a href="/user-manual/providers">Providers</a></li>
+              <li><a href="/user-manual/generics">Generics</a></li>
+              <li><a href="/user-manual/how-it-works">How It Works</a>
+                <ul>
+                  <li><a href="/user-manual/how-it-works#matching-process">Matching Process</a></li>
+                  <li><a href="/user-manual/how-it-works#mapping-process">Mapping Process</a></li>
+                </ul>
+              </li>
+              <li><a href="/user-manual/api-overview">API Overview</a></li>
+              <li><a href="/user-manual/spi-overview">SPI Overview</a></li>
+              <li><a href="/user-manual/faq">FAQ</a></li>
+              <li><a href="/user-manual/integrations">Integrations</a>
+                <ul>
+                  <li><a href="/user-manual/osgi-integration">OSGi</a></li>
+                  <li><a href="/user-manual/spring-integration">Spring</a></li>
+                  <li><a href="/user-manual/guice-integration">Guice</a></li>
+                  <li><a href="/user-manual/dagger-integration">Dagger</a></li>
+                  <li><a href="/user-manual/jooq-integration">jOOQ</a></li>
+                  <li><a href="/user-manual/jdbi-integration">JDBI</a></li>
+                  <li><a href="/user-manual/jackson-integration">Jackson</a></li>
+                  <li><a href="/user-manual/gson-integration">Gson</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="/examples">Examples</a></li>
+{% elsif page.menu == "examples" %}
+          <li><a href="/getting-started">Getting Started</a></li>
+          <li><a href="/user-manual">User Manual</a></li>
+          <li><a href="/examples">Examples</a></li>
+            <ul>
+              <li><a href="/examples/flattening">Flattening</a>
+                <ul>
+                  <li><a href="/examples/flattening#example-1">Example 1</a></li>
+                  <li><a href="/examples/flattening#example-2">Example 2</a></li>
+                </ul>
+              </li>
+              <li><a href="/examples/projection">Projection</a>
+                <ul>
+                  <li><a href="/examples/projection#example-1">Example 1</a></li>
+                  <li><a href="/examples/projection#example-2">Example 2</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+{% endif %}
+        </ul>
+      </div>

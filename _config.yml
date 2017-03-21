@@ -1,0 +1,16 @@
+# Jekyll
+permalink: pretty
+paginate: 10 
+name: ModelMapper
+baseurl: 
+markdown: kramdown
+version: 0.7.5
+
+kramdown:
+  parse_block_html: true
+
+kramdown:
+  input: GFM
+  enable_coderay: false
+  syntax_highlighter_opts:
+    disable : true
