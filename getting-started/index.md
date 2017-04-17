@@ -74,17 +74,19 @@ class OrderDTO {
 
 We can use ModelMapper to implicitly map an `order` instance to a new `OrderDTO`:
 
-{:.prettyprint .lang-java}
-	ModelMapper modelMapper = new ModelMapper();
-	OrderDTO orderDTO = modelMapper.map(order, OrderDTO.class);
+```java
+ModelMapper modelMapper = new ModelMapper();
+OrderDTO orderDTO = modelMapper.map(order, OrderDTO.class);
+```
 
 And we can test that properties are mapped as expected:
 
-{:.prettyprint .lang-java}
-	assertEquals(order.getCustomer().getName().getFirstName(), orderDTO.getCustomerFirstName());
-	assertEquals(order.getCustomer().getName().getLastName(), orderDTO.getCustomerLastName());
-	assertEquals(order.getBillingAddress().getStreet(), orderDTO.getBillingStreet());
-	assertEquals(order.getBillingAddress().getCity(), orderDTO.getBillingCity());
+```java
+assertEquals(order.getCustomer().getName().getFirstName(), orderDTO.getCustomerFirstName());
+assertEquals(order.getCustomer().getName().getLastName(), orderDTO.getCustomerLastName());
+assertEquals(order.getBillingAddress().getStreet(), orderDTO.getBillingStreet());
+assertEquals(order.getBillingAddress().getCity(), orderDTO.getBillingCity());
+```
 
 ## How It Works
 
@@ -103,7 +105,10 @@ ModelMapper supports a variety of mapping approaches, allowing you to use any mi
 <div class="tab-pane active java8">
 ```java
 modelMapper.addMappings(mapper -> {
-  mapper.map...
+  mapper.map(src -> src.getBillingAddress().getStreet(),
+      Destination::setBillingStreet);
+  mapper.map(src -> src.getBillingAddress().getCity(),
+      Destination::setBillingStreet);
 });
 ```
 </div>
