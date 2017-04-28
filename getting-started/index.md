@@ -8,16 +8,19 @@ title: Getting Started
 
 This section will guide you through the setup and basic usage of ModelMapper.
 
+{% include lang-tabs.html %}
+
 ## Setting Up
 
 If you're a Maven user just add the `modelmapper` library as a dependency:
 
-{:.prettyprint .lang-xml}
-	<dependency>
-	  <groupId>org.modelmapper</groupId>
-	  <artifactId>modelmapper</artifactId>
-	  <version>{{ site.version }}</version>
-	</dependency>
+```xml
+<dependency>
+  <groupId>org.modelmapper</groupId>
+  <artifactId>modelmapper</artifactId>
+  <version>{{ site.version }}</version>
+</dependency>
+```
 
 Otherwise you can [download](/downloads) the latest ModelMapper jar and add it to your classpath.
 
@@ -31,38 +34,40 @@ Let's try mapping some objects. Consider the following source and destination [o
 <div class="span4">  
 #### Source model
 
-{:.prettyprint .lang-java}
-	// Assume getters and setters on each class
-	class Order {
-	  Customer customer;
-	  Address billingAddress;
-	}
-	
-	class Customer {
-	  Name name;
-	}
-	
-	class Name {
-	  String firstName;
-	  String lastName;
-	}
-	
-	class Address {
-	  String street;
-	  String city;
-	}
+```java
+// Assume getters and setters on each class
+class Order {
+  Customer customer;
+  Address billingAddress;
+}
+
+class Customer {
+  Name name;
+}
+
+class Name {
+  String firstName;
+  String lastName;
+}
+
+class Address {
+  String street;
+  String city;
+}
+```
 </div>
 <div class="span4">
 #### Destination Model
 
-{:.prettyprint .lang-java}
-	// Assume getters and setters
-	class OrderDTO {
-	  String customerFirstName;
-	  String customerLastName;
-	  String billingStreet;
-	  String billingCity;
-	}
+```java
+// Assume getters and setters
+class OrderDTO {
+  String customerFirstName;
+  String customerLastName;
+  String billingStreet;
+  String billingCity;
+}
+```
 </div>
 </div>
 </div>
@@ -91,27 +96,38 @@ Even when the _source_ and _destination_ objects and their properties are differ
 
 While ModelMapper will do its best to implicitly match source and destination properties for you, sometimes you may need to explicitly define mappings between properties.
 
-ModelMapper supports a variety of mapping approaches, allowing you to use any mix of methods and field references. Let's map `Order.billingAddress.street` to `OrderDTO.billingStreet` and map `Order.billingAddress.city` to `OrderDTO.billingCity`. First we'll define a `PropertyMap` that contains these mappings:
+ModelMapper supports a variety of mapping approaches, allowing you to use any mix of methods and field references. Let's map `Order.billingAddress.street` to `OrderDTO.billingStreet` and map `Order.billingAddress.city` to `OrderDTO.billingCity`:
 
-{:.prettyprint .lang-java}
-	PropertyMap<Order, OrderDTO> orderMap = new PropertyMap<Order, OrderDTO>() {
-	  protected void configure() {
-	    map().setBillingStreet(source.getBillingAddress().getStreet());
-	    map(source.billingAddress.getCity(), destination.billingCity);
-	  }
-	};
+{::options parse_block_html="true" /}
+<div class="tab-content">
+<div class="tab-pane active java8">
+```java
+modelMapper.addMappings(mapper -> {
+  mapper.map...
+});
+```
+</div>
+<div class="tab-pane java6">
+```java
+PropertyMap<Order, OrderDTO> orderMap = new PropertyMap<Order, OrderDTO>() {
+  protected void configure() {
+    map().setBillingStreet(source.getBillingAddress().getStreet());
+    map(source.billingAddress.getCity(), destination.billingCity);
+  }
+});
 
-Then with our mappings defined we can add them to our `ModelMapper` instance:
-
-{:.prettyprint .lang-java}
-	modelMapper.addMappings(orderMap);
+modelMapper.addMappings(orderMap);
+```
+</div>
+</div>
 
 ## Conventional Configuration
 
 As an alternative to manually mapping `Order.billingAddress.street` to `OrderDTO.billingStreet`, we can configure different conventions to be used when ModelMapper attempts to match these properties. The Loose [matching strategy](http://modelmapper.org/user-manual/configuration/#matching-strategies), which more loosely matches property names, will work in this case:
 
-{:.prettyprint .lang-java}
-	modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+```java
+modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+```
 
 Additional [matching strategies](http://modelmapper.org/user-manual/configuration/#matching-strategies) and other conventions can also be [configured](/user-manual/configuration) to control ModelMapper's property matching process.
 
@@ -121,18 +137,21 @@ Aside from writing tests to verify that your objects are being mapped as expecte
 
 First we have to let ModelMapper know about the types we want to validate. We can do this by creating a `TypeMap`:
 
-{:.prettyprint .lang-java}
-	modelMapper.createTypeMap(Order.class, OrderDTO.class);
+```java
+modelMapper.createTypeMap(Order.class, OrderDTO.class);
+```
 
 Or we can add mappings from a `PropertyMap` which will automatically create a `TypeMap` if one doesn't already exist for the _source_ and _destination_ types:
 
-{:.prettyprint .lang-java}
-	modelMapper.addMappings(new OrderMap());
+```java
+modelMapper.addMappings(new OrderMap());
+```
 
 Then we can validate our mappings:
 
-{:.prettyprint .lang-java}
-	modelMapper.validate();
+```java
+modelMapper.validate();
+```
 
 If any `TypeMap` contains a destination property that is unmatched to a source property a `ValidationException` will be thrown.
 

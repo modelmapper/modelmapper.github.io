@@ -308,6 +308,17 @@ a:hover {
   padding-bottom: 10px;
 }
 
+/* Code */
+
+.hljs {
+  padding: 0px;
+  background-color: #f5f5f5;
+}
+
+.nav-tabs {
+  margin-top: 15px;
+}
+
 /* Misc */
 
 hr.soften {
