@@ -41,13 +41,13 @@ Multiple PropertyMaps may be added for the same source and destination types, so
 <div class="tab-pane active java8">
 ## Creating an Expression Mapping
 
-You can simply define a property mapping by using lambda expressions to a source getter and a destination setter.
+You can define a property mapping by using method references to match a source getter and destination setter.
 
 ```java
 typeMap.addMapping(Source::getFirstName, Destination::setName);
 ```
 
-The types could be mismatched of the source getter and the destination setter.
+The source and destination types do not need to match.
 
 ```java
 typeMap.addMapping(Source::getAge, Destination::setAgeString);
@@ -62,9 +62,7 @@ typeMap.addMapping(src -> src.getCustomer().getAge(), PersonDTO::setAge);
 This example maps the destination type's `getCustomer().setName()` method hierarchy to the source type's `person.getFirstName()` property hierarchy: 
 
 ```java
-typeMap.addMapping(
-  src -> src.getPerson().getFirstName(),
-  (dest, v) -> dest.getCustomer().setName(v));
+typeMap.addMapping(src -> src.getPerson().getFirstName(), (dest, v) -> dest.getCustomer().setName(v));
 ```
 
 ## Creating an ExpressionMap
@@ -93,8 +91,7 @@ map().setName(source.getFirstName());
 </div>
 <div class="tab-pane active java8">
 ```java
-typeMap.addMappings(
-    mapper -> mapper.map(Source::getFirstName, Destination::setName));
+typeMap.addMappings(mapper -> mapper.map(Source::getFirstName, Destination::setName));
 ```
 </div>
 </div>
@@ -138,8 +135,7 @@ map(source.getAge()).setAgeString(null);
 </div>
 <div class="tab-pane active java8">
 ```java
-typeMap.addMappings(
-    mapper -> mapper.map(Source::getAge, Destination::setAgeString));
+typeMap.addMappings(mapper -> mapper.map(Source::getAge, Destination::setAgeString));
 ```
 </div>
 </div>
@@ -175,8 +171,7 @@ map().setAge(source.getCustomer().getAge());
 </div>
 <div class="tab-pane active java8">
 ```java
-typeMap.addMappings(
-    mapper -> mapper.map(src -> src.getCustomer().getAge(), PersonDTO::setAge));
+typeMap.addMappings(mapper -> mapper.map(src -> src.getCustomer().getAge(), PersonDTO::setAge));
 ```
 </div>
 </div>
@@ -191,10 +186,7 @@ map().getCustomer().setName(source.person.getFirstName());
 </div>
 <div class="tab-pane active java8">
 ```java
-typeMap.addMappings(
-    mapper -> mapper.<String>map(
-        src -> src.getPerson().getFirstName(),
-        (dest, v) -> dest.getCustomer().setName(v)));
+typeMap.addMappings(mapper -> mapper.<String>map(src -> src.getPerson().getFirstName(), (dest, v) -> dest.getCustomer().setName(v)));
 ```
 </div>
 </div>
@@ -237,8 +229,7 @@ skip().setName(null);
 </div>
 <div class="tab-pane active java8">
 ```java
-typeMap.addMappings(
-    mapper -> mapper.skip(Destination::setName));
+typeMap.addMappings(mapper -> mapper.skip(Destination::setName));
 ```
 </div>
 </div>
@@ -290,17 +281,14 @@ using(toUppercase).map().setName(source.getName());
 Using the `toUppercase` Converter to map from a source property to a destination property is simple:
 
 ```java
-typeMap.addMappings(
-    mapper -> mapper.using(toUppercase).map(Person::getName, PersonDTO::setName));
+typeMap.addMappings(mapper -> mapper.using(toUppercase).map(Person::getName, PersonDTO::setName));
 ```
 
 Or we can also use lambda expression in `using`.
 
 ```java
-typeMap.addMappings(
-    mapper -> mapper
-        .using(ctx -> ((String) ctx.getSource()).toUpperCase())
-        .map(Person::getName, PersonDTO::setName));
+typeMap.addMappings(mapper -> mapper.using(ctx -> ((String) ctx.getSource()).toUpperCase())
+	.map(Person::getName, PersonDTO::setName));
 ```
 </div>
 </div>
@@ -351,9 +339,7 @@ using(toUppercase).map().customer.setName(source.getPerson().getFirstName());
 ```java
 typeMap.addMappings(
     // toUppercase will be called with the property types from getFirstName() and setName()
-    mapper -> mapper
-        .using(toUppercase)
-        .<String>map(src -> src.getPerson().getFirstName(), (dest, v) -> dest.getCustomer().setName(v)));
+    mapper -> mapper.using(toUppercase).<String>map(src -> src.getPerson().getFirstName(), (dest, v) -> dest.getCustomer().setName(v)));
 ```
 </div>
 </div>
@@ -392,17 +378,14 @@ with(personProvider).map().setPerson(source.getPerson());
 Configuring `personProvider` to be used for a specific property mapping is simple:
 
 ```java
-typeMap.addMappings(
-    mapper -> mapper.with(personProvider).map(Source::getPerson, Destination::setPerson));
+typeMap.addMappings(mapper -> mapper.with(personProvider).map(Source::getPerson, Destination::setPerson));
 ```
 
 Or we can also use lambda expression in `with`.
 
 ```java
-typeMap.addMappings(
-    mapper -> mapper
-        .with(req -> new Person())
-        .map(Source::getPerson, Destination::setPerson));
+typeMap.addMappings(mapper ->
+	mapper.with(req -> new Person()).map(Source::getPerson, Destination::setPerson));
 ```
 </div>
 </div>
@@ -413,8 +396,7 @@ When mapping takes place, `personProvider` will be called to retrieve a Person i
 
 Providers can also be used with converters:
 ```java
-with(personProvider)
-    .using(personConverter)
+with(personProvider).using(personConverter)
     .map().setPerson(source.getPerson());
 ```
 
@@ -461,8 +443,7 @@ when(notNull).map().setName(source.getName());
 </div>
 <div class="tab-pane active java8">
 ```java
-typeMap.addMappings(
-    mapper -> mapper.when(notNull).map(Person::getName, PersonDTO::setName));
+typeMap.addMappings(mapper -> mapper.when(notNull).map(Person::getName, PersonDTO::setName));
 ```
 </div>
 </div>
@@ -477,8 +458,7 @@ when(notNull).skip().setName(source.getName());
 </div>
 <div class="tab-pane active java8">
 ```java
-typeMap.addMappings(
-    mapper -> mapper.when(notNull).skip(PersonDTO::setName));
+typeMap.addMappings(mapper -> mapper.when(notNull).skip(PersonDTO::setName));
 ```
 </div>
 </div>
