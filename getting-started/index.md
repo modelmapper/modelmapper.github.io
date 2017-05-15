@@ -108,7 +108,7 @@ modelMapper.addMappings(mapper -> {
   mapper.map(src -> src.getBillingAddress().getStreet(),
       Destination::setBillingStreet);
   mapper.map(src -> src.getBillingAddress().getCity(),
-      Destination::setBillingStreet);
+      Destination::setBillingCity);
 });
 ```
 </div>
