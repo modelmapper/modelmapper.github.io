@@ -72,7 +72,7 @@ class OrderDTO {
 </div>
 </div>
 
-We can use ModelMapper to implicitly map an `order` instance to a new `OrderDTO`:
+We can use ModelMapper to implicitly map an `Order` instance `order` to a new `OrderDTO`:
 
 ```java
 ModelMapper modelMapper = new ModelMapper();
