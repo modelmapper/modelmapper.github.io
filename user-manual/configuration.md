@@ -54,9 +54,9 @@ This example configures a `ModelMapper` to allow any source and destination prop
 This example configures a `ModelMapper` to use the `Underscore` name tokenizer for source and destination properties:
 
 {:.prettyprint .lang-java}
-	modelMapper.getConfiguration();
-	  .setSourceNameTokenizer(NameTokenizers.UNDERSCORE);
-	  .setDestinationNameTokenizer(NameTokenizers.UNDERSCORE);
+	modelMapper.getConfiguration()
+	  .setSourceNameTokenizer(NameTokenizers.UNDERSCORE)
+	  .setDestinationNameTokenizer(NameTokenizers.UNDERSCORE)
 
 ## Available Conventions
 
