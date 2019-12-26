@@ -104,7 +104,7 @@ ModelMapper supports a variety of mapping approaches, allowing you to use any mi
 <div class="tab-content">
 <div class="tab-pane active java8">
 ```java
-modelMapper.addMappings(mapper -> {
+modelMapper.typeMap(Order.class, OrderDTO.class).addMappings(mapper -> {
   mapper.map(src -> src.getBillingAddress().getStreet(),
       Destination::setBillingStreet);
   mapper.map(src -> src.getBillingAddress().getCity(),
