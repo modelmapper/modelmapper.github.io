@@ -94,7 +94,7 @@ We can then map Records to Orders as usual, with properties being mapped accordi
     
 ## Things to Note
 
-ModelMapper maintains a [TypeMap](http://modelmapper.org/javadoc/org/modelmapper/TypeMap.html) for each source and destination type, containing the mappings bewteen the two types. For "generic" types such as Record this can be problematic since the structure of a Record can vary. In order to distinguish structurally different Records that map to the same destination type, we can provide a _type map name_ to ModelMapper.
+ModelMapper maintains a [TypeMap](http://modelmapper.org/javadoc/org/modelmapper/TypeMap.html) for each source and destination type, containing the mappings between the two types. For "generic" types such as Record this can be problematic since the structure of a Record can vary. In order to distinguish structurally different Records that map to the same destination type, we can provide a _type map name_ to ModelMapper.
 
 Continuing with the example above, let's map another order Record, this one with a different structure, to the same Order class:
 
