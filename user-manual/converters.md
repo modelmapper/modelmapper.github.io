@@ -13,18 +13,18 @@ Conversion to a destination type or property can be delegated to a Converter. Co
 Converters can be implemented in two ways. The first is by extending `AbstractConverter`:
 
 {:.prettyprint .lang-java}
-	Converter<String, String> toUppercase = new AbstractConverter<String, String>() {
+	Converter<String, String> toUpperCase = new AbstractConverter<String, String>() {
 	  protected String convert(String source) {
-	    return source == null ? null : source.toUppercase();
+	    return source == null ? null : source.toUpperCase();
 	  }
 	};
 
 The second way is by implementing the `Converter` interface which exposes a `MappingContext` that contains contains information related to the current mapping request:
 
 {:.prettyprint .lang-java}
-	Converter<String, String> toUppercase = new Converter<String, String>() {
+	Converter<String, String> toUpperCase = new Converter<String, String>() {
 	  public String convert(MappingContext<String, String> context) {
-	    return context.getSource() == null ? null : context.getSource().toUppercase();
+	    return context.getSource() == null ? null : context.getSource().toUpperCase();
 	  }
 	};
 
