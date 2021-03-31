@@ -21,12 +21,26 @@ typeMap.include(SrcA.class, DestA.class)
 We can also include a base TypeMap with includeBase.
 
 ```java
-// Create base TypeMaps with explicit mappings
-TypeMap<BaseSrcA, BaseDestA> typeMap = modelMapper.createTypeMap(BaseSrcA.class, BaseDestA.class)
-	.addMapping(BaseSrcA::getFirstName, BaseDestA::setName);
-TypeMap<BaseSrcB, BaseDestB> typeMap = modelMapper.createTypeMap(BaseSrcB.class, BaseDestB.class)
-	.addMapping(BaseSrcB::getAgeString, BaseDestB::setAge);
+class BaseSrc {
+	private String firstName;
+	public String getFirstName();
+}
 
-typeMap.includeBase(BaseSrcA.class, BaseDestA.class)
-	.includeBase(BaseSrcB.class, BaseDestB.class);
+class Src extends BaseSrc {
+}
+
+class BaseDest {
+	private String name;
+	public void setName(String name);
+}
+
+class Dest extends BaseDest {	
+}
+
+// Create base TypeMaps with explicit mappings
+TypeMap<BaseSrc, BaseDest> baseTypeMap = modelMapper.createTypeMap(BaseSrc.class, BaseDest.class)
+	.addMapping(BaseSrc::getFirstName, BaseDest::setName);
+
+TypeMap<Src, Dest> typeMap = modelMapper.createTypeMap(Src.class, Dest.class);
+typeMap.includeBase(baseTypeMap);
 ```
