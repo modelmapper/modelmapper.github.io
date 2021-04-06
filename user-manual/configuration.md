@@ -10,12 +10,18 @@ ModelMapper uses a set of conventions and configuration to determine which sourc
 
 Setting|Description|Default Value
 -------|-----------|-------------
+Ambiguity ignored|Determines whether destination properties that match more than one source property should be ignored|false
 Access level|Determines which methods and fields are eligible for matching based on accessibility|public
+Collections merge|Determines whether the destination items should be replaced or merged while source and destination have different size|true
 Field matching|Indicates whether fields are eligible for matching|disabled
 Naming convention|Determines which methods and fields are eligible for matching based on name|JavaBeans
+Full type matching|Determines wether [ConditionalConverters](http://modelmapper.org/javadoc/org/modelmapper/spi/ConditionalConverter.html) must define a full match in order to be applied|false
+Implicit matching|Determines whether the implicit mapping (mapping the models intelligently) should be enabled (see [Matching Process](http://modelmapper.org/user-manual/how-it-works/#matching-process))|true
 Name transformer|Transforms eligible property and class names prior to tokenization|JavaBeans
 Name tokenizer|Tokenizes source and destination property names prior to matching|Camel Case
 [Matching strategy](#matching-strategies)|Determines how source and destination tokens are matched|Standard
+Prefer nested properties|Determines if the implicit mapping should map the nested properties, we strongly recommend to disable this option while you are mapping a model contains circular reference|true
+Skip null|Determines whether a property should be skipped or not when the property value is null|false
 
 You can read about how this configuration is used during the [matching process](/user-manual/how-it-works/#matching-process).
 
