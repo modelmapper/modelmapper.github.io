@@ -35,7 +35,7 @@ order_id|customer_id|customer_street_address|customer_address_city
 We may need to map this to a more complex object model:
 
 {:.prettyprint .lang-java}
-	// Assume getters and setters are present
+    // Assume getters and setters are present
 
     public class Order {
       private int id;
@@ -43,12 +43,13 @@ We may need to map this to a more complex object model:
     }
 
     public class Customer {
-	  private Address address;
+      private int id;
+      private Address address;
     }
 
     public class Address {
       private String street;
-	  private String city;
+      private String city;
     }
 
 Since the source Record's fields in this example uses an underscore naming convention, we'll need to configure ModelMapper to tokenize source property names by underscore:
