@@ -94,7 +94,7 @@ When the `map` method is called, the _source_ and _destination_ types are analyz
 
 Even when the _source_ and _destination_ objects and their properties are different, as in the example above, ModelMapper will do its best to determine reasonable matches between properties according to the configured [matching strategy](http://modelmapper.org/user-manual/configuration/#matching-strategies).
 
-## Explicit Mapping
+## Handling Mismatches
 
 While ModelMapper will do its best to implicitly match source and destination properties for you, sometimes you may need to explicitly define mappings between properties.
 
