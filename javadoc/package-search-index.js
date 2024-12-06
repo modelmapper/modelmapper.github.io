@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"org.modelmapper"},{"l":"org.modelmapper.builder"},{"l":"org.modelmapper.config"},{"l":"org.modelmapper.convention"},{"l":"org.modelmapper.spi"}]
